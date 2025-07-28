@@ -1,7 +1,10 @@
-  TODOs
+TODOs
 - add unit tests
 - add Spring Security to limit access to this method
 - add status code to RS
 - add Redis cache
 - add retry and fail over logic
 - service discovery
+
+Advance topics ::
+- Use HTTPS
