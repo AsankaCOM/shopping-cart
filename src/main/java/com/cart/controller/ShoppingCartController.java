@@ -14,6 +14,7 @@ public class ShoppingCartController {
 
     //TODO Asanka, add Spring Security to limit access to this method
     //TODO Asanka, add status code to RS
+    //TODO Asanka, add Redis cache
 
 
     BookService bookService;
