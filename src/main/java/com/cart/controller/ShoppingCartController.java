@@ -23,12 +23,12 @@ public class ShoppingCartController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/books")
     public List<BookDTO> listBooks() {
         return bookService.getAllBooks();
     }
 
-    @PostMapping("/")
+    @PostMapping("/books")
     public void addBook(@RequestBody BookDTO bookDTO) {
         bookService.addBook(bookDTO);
     }
