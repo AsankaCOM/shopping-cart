@@ -18,7 +18,6 @@ public class BookService {
     }
 
     public List<BookDTO> getAllBooks() {
-
         List<BookDTO> books = new ArrayList<>();
 
         bookRepository.findAll().forEach(book -> books.add(BookDTO.builder()
@@ -33,15 +32,32 @@ public class BookService {
         return books;
     }
 
-    public void addBook(BookDTO bookDTO) {
+    public BookDTO getBookById(Long id) {
+        //TODO Asanka, Add mapstruct
+        return bookRepository.findById(id).map(book -> BookDTO.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .isbn(book.getIsbn())
+                .publicationYear(book.getPublicationYear())
+                .price(book.getPrice())
+                .build()).get();
+    }
+
+    public BookDTO addBook(Book book) {
         //TODO Asanka
         //  - validations
         //  - Error handling
-        Book book = new Book(bookDTO.getTitle(),
-                bookDTO.getAuthor(),
-                bookDTO.getIsbn(),
-                bookDTO.getPublicationYear(),
-                bookDTO.getPrice());
-        bookRepository.save(book);
+
+        book = bookRepository.save(book);
+
+        return BookDTO.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .isbn(book.getIsbn())
+                .publicationYear(book.getPublicationYear())
+                .price(book.getPrice())
+                .build();
     }
 }
