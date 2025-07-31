@@ -2,6 +2,7 @@ package com.cart.service;
 
 import com.cart.dto.BookDTO;
 import com.cart.exception.BookNotFoundException;
+import com.cart.exception.ErrorCode;
 import com.cart.model.Book;
 import com.cart.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class BookService {
                         .publicationYear(book.getPublicationYear())
                         .price(book.getPrice())
                         .build())
-                .orElseThrow(() -> new BookNotFoundException("No book found for the given ID"));
+                .orElseThrow(() -> new BookNotFoundException(ErrorCode.BOOK_NOT_FOUND));
     }
 
     public void deleteBook(Long id) {

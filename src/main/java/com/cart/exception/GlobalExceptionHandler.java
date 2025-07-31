@@ -12,7 +12,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<?> handleException(BookNotFoundException exception) {
-        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(), exception.getMessage(), "Book Not Found ...");
+        ErrorResponse errorResponse = new ErrorResponse(LocalDateTime.now(),
+                exception.getMessage(),
+                exception.getErrorCode(),
+                "The requested book could not be found in the database");
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }
