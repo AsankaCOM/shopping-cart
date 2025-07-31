@@ -48,4 +48,10 @@ public class ShoppingCartController {
         return ResponseEntity.created(location)
                 .body(book);
     }
+
+    @DeleteMapping("/books/{id}")
+    public ResponseEntity<BookDTO> deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.ok().build();
+    }
 }

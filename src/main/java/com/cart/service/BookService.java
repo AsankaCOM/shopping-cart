@@ -1,6 +1,7 @@
 package com.cart.service;
 
 import com.cart.dto.BookDTO;
+import com.cart.exception.BookNotFoundException;
 import com.cart.model.Book;
 import com.cart.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -34,14 +35,22 @@ public class BookService {
 
     public BookDTO getBookById(Long id) {
         //TODO Asanka, Add mapstruct
-        return bookRepository.findById(id).map(book -> BookDTO.builder()
-                .id(book.getId())
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .isbn(book.getIsbn())
-                .publicationYear(book.getPublicationYear())
-                .price(book.getPrice())
-                .build()).get();
+        return bookRepository.findById(id)
+                .map(book -> BookDTO.builder()
+                        .id(book.getId())
+                        .title(book.getTitle())
+                        .author(book.getAuthor())
+                        .isbn(book.getIsbn())
+                        .publicationYear(book.getPublicationYear())
+                        .price(book.getPrice())
+                        .build())
+                .orElseThrow(() -> new BookNotFoundException("No book found for the given ID"));
+    }
+
+    public void deleteBook(Long id) {
+        if (getBookById(id) != null) {
+            bookRepository.deleteById(id);
+        }
     }
 
     public BookDTO addBook(Book book) {
