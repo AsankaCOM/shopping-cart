@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: shopping-cart
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ecomm?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: my-strong-password
+
+  # JPA settings
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  # Okta Security settings
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: ztbMuuY0GG9LHZUlypGl74WYFwV78IfQ
+            client-secret: GYhubh05vbWSqdNtgThwn8oakwSXNwXqd4nVkzqkSzlkwS_s4DOEFmowgfHwrUhl
+          #            scope: openid+profile
+          #        provider:
+          #          okta:
+          #            authorization-uri: https://your-subdomain.oktapreview.com/oauth2/v1/authorize
+          #            token-uri: https://your-subdomain.oktapreview.com/oauth2/v1/token
+          #            user-info-uri: https://your-subdomain.oktapreview.com/oauth2/v1/userinfo
+          #            user-name-attribute: sub
+          #            jwk-set-uri: https://your-subdomain.oktapreview.com/oauth2/v1/keys
+
+
+okta:
+  oauth2:
+    issuer: https://dev-yohelt72e38t5w40.us.auth0.com/
+    client-id: ztbMuuY0GG9LHZUlypGl74WYFwV78IfQ
+    client-secret: GYhubh05vbWSqdNtgThwn8oakwSXNwXqd4nVkzqkSzlkwS_s4DOEFmowgfHwrUhl
+
+server:
+  port: 3000
