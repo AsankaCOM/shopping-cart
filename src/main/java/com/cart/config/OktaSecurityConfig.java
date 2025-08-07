@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -16,11 +17,10 @@ public class OktaSecurityConfig {
     http
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/cart/**").authenticated()
-            .requestMatchers("/api/secure-data").authenticated()
             .anyRequest().permitAll()
         )
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-        .cors();
+    .cors(AbstractHttpConfigurer::disable);
     return http.build();
   }
 }
