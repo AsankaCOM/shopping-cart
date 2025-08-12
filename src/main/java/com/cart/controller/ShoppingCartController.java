@@ -15,43 +15,45 @@ import java.util.List;
 @RestController
 @RequestMapping("/cart")
 public class ShoppingCartController {
-    BookService bookService;
 
-    public ShoppingCartController(BookService bookService) {
-        this.bookService = bookService;
-    }
+  BookService bookService;
 
-    @GetMapping("/books")
-    public ResponseEntity<List<BookDTO>> listBooks() {
-        return ResponseEntity.ok(bookService.getAllBooks());
-    }
+  public ShoppingCartController(BookService bookService) {
+    this.bookService = bookService;
+  }
 
-    @GetMapping("/books/{id}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
-        return ResponseEntity.ok(bookService.getBookById(id));
-    }
+  @GetMapping("/books")
+  public ResponseEntity<List<BookDTO>> listBooks() {
+    return ResponseEntity.ok(bookService.getAllBooks());
+  }
 
-    @PostMapping("/books")
-    public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
-        BookDTO book = bookService.addBook(new Book(bookDTO.getTitle(),
-                bookDTO.getAuthor(),
-                bookDTO.getIsbn(),
-                bookDTO.getPublicationYear(),
-                bookDTO.getPrice()));
+  @GetMapping("/books/{id}")
+  public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {
+    return ResponseEntity.ok(bookService.getBookById(id));
+  }
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(book.getId())
-                .toUri();
+  @PostMapping("/books")
+  public ResponseEntity<BookDTO> addBook(@RequestBody BookDTO bookDTO) {
+    BookDTO book = bookService.addBook(new Book(bookDTO.getTitle(),
+        bookDTO.getAuthor(),
+        bookDTO.getIsbn(),
+        bookDTO.getPublicationYear(),
+        bookDTO.getPrice(),
+        bookDTO.getBookUrl()));
 
-        return ResponseEntity.created(location)
-                .body(book);
-    }
+    URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(book.getId())
+        .toUri();
 
-    @DeleteMapping("/books/{id}")
-    public ResponseEntity<BookDTO> deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
-        return ResponseEntity.ok().build();
-    }
+    return ResponseEntity.created(location)
+        .body(book);
+  }
+
+  @DeleteMapping("/books/{id}")
+  public ResponseEntity<BookDTO> deleteBook(@PathVariable Long id) {
+    bookService.deleteBook(id);
+    return ResponseEntity.ok().build();
+  }
 }

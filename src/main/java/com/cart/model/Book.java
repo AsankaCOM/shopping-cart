@@ -11,29 +11,33 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    private String title;
+  private String title;
 
-    private String author;
+  private String author;
 
-    private String isbn;
+  private String isbn;
 
-    private Integer publicationYear;
+  private Integer publicationYear;
 
-    private Double price;
+  private Double price;
 
-    public Book(String title,
-                String author,
-                String isbn,
-                Integer publicationYear,
-                Double price) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.publicationYear = publicationYear;
-        this.price = price;
-    }
+  private String bookUrl;
+
+  public Book(String title,
+      String author,
+      String isbn,
+      Integer publicationYear,
+      Double price,
+      String bookUrl) {
+    this.title = title;
+    this.author = author;
+    this.isbn = isbn;
+    this.publicationYear = publicationYear;
+    this.price = price;
+    this.bookUrl = bookUrl;
+  }
 }

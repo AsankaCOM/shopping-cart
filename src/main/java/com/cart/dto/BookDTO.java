@@ -12,4 +12,5 @@ public class BookDTO {
     private String isbn;
     private Integer publicationYear;
     private Double price;
+    private String bookUrl;
 }

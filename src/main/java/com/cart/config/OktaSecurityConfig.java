@@ -20,7 +20,7 @@ public class OktaSecurityConfig {
             .anyRequest().permitAll()
         )
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-    .cors(AbstractHttpConfigurer::disable);
+        .cors();
     return http.build();
   }
 }

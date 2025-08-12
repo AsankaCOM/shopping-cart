@@ -29,6 +29,7 @@ public class BookService {
                 .isbn(book.getIsbn())
                 .publicationYear(book.getPublicationYear())
                 .price(book.getPrice())
+                .bookUrl(book.getBookUrl())
                 .build()));
 
         return books;
