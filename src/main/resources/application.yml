@@ -24,4 +24,4 @@ spring:
           issuer-uri: https://dev-yohelt72e38t5w40.us.auth0.com/
 
 server:
-  port: 8080
+  port: 3000
