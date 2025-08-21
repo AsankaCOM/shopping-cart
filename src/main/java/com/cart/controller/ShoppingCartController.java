@@ -56,4 +56,10 @@ public class ShoppingCartController {
     bookService.deleteBook(id);
     return ResponseEntity.ok().build();
   }
+
+  @PostMapping("/order")
+  public ResponseEntity<BookDTO> order(@RequestBody BookDTO bookDTO) {
+    log.info("take order");
+    return ResponseEntity.ok(null);
+  }
 }
