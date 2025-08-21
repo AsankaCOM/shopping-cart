@@ -13,7 +13,7 @@ public class CorsConfig {
     return new WebMvcConfigurer() {
       @Override
       public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/cart/*")
+        registry.addMapping("/cart/books")
             .allowedOrigins("*") // Allow all origins
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*");

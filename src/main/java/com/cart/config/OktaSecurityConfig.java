@@ -17,7 +17,6 @@ public class OktaSecurityConfig {
     http
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/cart/**").authenticated()
-            .requestMatchers("/cart/order").permitAll()
             .anyRequest().permitAll()
         )
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
