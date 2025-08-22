@@ -13,4 +13,5 @@ public class BookDTO {
     private Integer publicationYear;
     private Double price;
     private String bookUrl;
+    private int quantity;
 }

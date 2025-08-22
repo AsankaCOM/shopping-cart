@@ -1,8 +1,12 @@
 package com.cart.controller;
 
 import com.cart.dto.BookDTO;
+import com.cart.dto.CustomerDTO;
+import com.cart.dto.OrderDTO;
 import com.cart.model.Book;
+import com.cart.model.CustomerOrder;
 import com.cart.service.BookService;
+import com.cart.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +21,12 @@ import java.util.List;
 public class ShoppingCartController {
 
   BookService bookService;
+  OrderService orderService;
 
-  public ShoppingCartController(BookService bookService) {
+  public ShoppingCartController(BookService bookService,
+      OrderService orderService) {
     this.bookService = bookService;
+    this.orderService = orderService;
   }
 
   @GetMapping("/books")
@@ -56,4 +63,22 @@ public class ShoppingCartController {
     bookService.deleteBook(id);
     return ResponseEntity.ok().build();
   }
+
+  @PostMapping("/order")
+  public ResponseEntity<OrderDTO> addOrder(@RequestBody OrderDTO orderDTO) {
+    CustomerDTO customer = orderDTO.getCustomer();
+
+    OrderDTO order = orderService.addOrder(
+        new CustomerOrder(customer.getName(), customer.getEmail()));
+
+    URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(order.getId())
+        .toUri();
+
+    return ResponseEntity.created(location)
+        .body(order);
+  }
+
 }
